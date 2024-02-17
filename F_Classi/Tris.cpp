@@ -61,6 +61,47 @@ class Tris{
 
 };
 
+void stampa_griglia()
+bool giocatore_uno(int x, int y)
+bool giocatore_uno(int x, int y)
+
+int colonna vimcitore(){
+    int risultato;
+    for (int i=0; i< 3; i++){
+        risultato = controlla_colonna(i);
+        if (risultato != 0)
+            return risultato;
+    }
+}
+private:
+    int controlla_colonna(int col){
+        int acc uno = 0;
+        int acc due = 0;
+        for (int i = 0; i < 3; i++){
+            int cella = griglia[i][col];
+            if (cella == 1)
+                acc_uno++;
+            else if (cella == 2 )
+                acc_due++;
+        }
+        
+        if(acc_uno == 3)
+            return 1;
+        if(acc_due == 3)
+            return 2;
+        return 0;
+    }
+
+    int controlla_riga(int riga)
+    {
+    }
+        
+    int controlla_riga(int riga){
+        int ac_uno = 0;
+        int acc_due = 0;
+
+    }
+    
 
 int main(int arg, char const *argv[]){
     Tris myTris;
@@ -72,18 +113,26 @@ int main(int arg, char const *argv[]){
 
     int x, y;
     bool mossa_valida;
+    int vincitore;
+    int mosse_totali = 0;
 
-    do{
-        cout << "Mossa del giocatore 1."<< endl;
-        cout << "x: ";
-        cin >> x;
+    while (mosse_totali<9)
+    {
+        do{
+            cout << "Mossa del giocatore 1."<< endl;
+            cout << "x: ";
+            cin >> x;
 
-        cout << "y: ";
-        cin >> y;
-        mossa_valida = myTris.giocatore_uno(x, y);
-    }while (!mossa_valida);
+            cout << "y: ";
+            cin >> y;
+            mossa_valida = myTris.giocatore_uno(x, y);
+        }while (!mossa_valida);
 
-    myTris.stampa_griglia();
+        myTris.stampa_griglia();
+
+    vincitoreo = myTris.controlla_vincitore(;)
+    if(vincitore != 0)
+        break;
 
      do{
         cout << "Mossa del giocatore 2."<< endl;
@@ -98,5 +147,16 @@ int main(int arg, char const *argv[]){
 
     myTris.stampa_griglia();
 
+    mosse_totali = mosse_totali + 2;
+
+}
+
+    if (vincitore == 1) 
+        cout << "vince giocatore 1" << endl;
+    else if(vincitore == 2)
+        cout <<"vince giocatore 2!" << endl;
+    else
+        cout << "pareggio" << endl;
+        
     return 0;
 }
