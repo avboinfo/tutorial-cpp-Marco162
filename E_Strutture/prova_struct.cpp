@@ -13,19 +13,32 @@ using namespace std;
 ** attraverso il nome unico della struttura.
 */
 
-struct numeri
+struct persona
 {
-    int val_uno;
-    float val_due;
+
+    string nome;
+    int eta;
 };
 
+typedef struct {int uno; int due;} COPPIA;
 
 int main()
 {
-  struct numeri n;
-  n.val_uno = 100;
-  cout <<  "1) n.val_uno = " << n.val_uno << " - " << "n.val_due = " << n.val_due << endl;
-  n.val_due = 33.33;
-  cout <<  "2) n.val_uno = " << n.val_uno << " - " << "n.val_due = " << n.val_due << endl;
-  return 0;
+  struct persona gigi, gigietto;
+  COPPIA coppia_eta;
+  coppia_eta.uno = 17;
+  coppia_eta.due = 7;
+  
+  gigi.nome="Luigi";
+  gigi.eta = coppia_eta.uno;
+  gigietto.nome = "Luigino";
+  gigietto.eta = coppia_eta.due;
+
+  cout << "-------------------------------------------------" << endl;
+  cout << "-------------------------------------------------" << endl;
+  cout << "gigi si chiama: "<< gigi.nome << ", e ha: " << gigi.eta << " anni" << endl;
+  cout << "gigietto si chiama: "<< gigietto.nome << ", e ha: " << gigietto.eta << " anni" << endl;
+  cout << "-------------------------------------------------" << endl;
+  cout << "-------------------------------------------------" << endl;
+    return 0;
 }

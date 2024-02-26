@@ -1,162 +1,162 @@
-/*
-se in griglia c'é ZERO cella vuota
-se in griglia c'é UNO stiamo parlando di una X (giocatore 1)
-se in griglia c'é DUE stiamo parlando di un cerchio (giocatore 2)
-*/
-
 #include <iostream>
-
 using namespace std;
 
-class Tris{
-    public:
-        int griglia[3][3];
+class Tris {
+public:
+    char griglia[3][3];
 
-    void reset_tabella(){
-        for(int i=0; i<3; i++){
-            for(int j=0; j<3; j++){
-                griglia[i][j] = 0;
+    void reset_tabella() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                griglia[i][j] = '-';
             }
         }
     }
 
-    void stampa_griglia(){
-        for(int i=0; i<3; i++){
-            for(int j=0; j<3; j++){
-                cout<< griglia[i][j] << "\t";
+    void stampa_griglia() {
+        cout << "-------------" << endl;
+        for (int i = 0; i < 3; i++) {
+            cout << "| ";
+            for (int j = 0; j < 3; j++) {
+                cout << griglia[i][j] << " | ";
             }
             cout << endl;
+            cout << "-------------" << endl;
         }
     }
 
-    bool giocatore_uno(int x, int y){
-        if (x<2 || x>0){
-        return false;
-        }
-
-        if (y<2 || y>0){
-        return false;
-        }
-        if(griglia[x][y] == 1 || griglia [x][y] == 2){
+    bool giocatore_uno(int x, int y) {
+        if (x > 2 || x < 0 || y > 2 || y < 0)
             return false;
-        }
-        griglia[x][y] == 1;
+
+        if (griglia[x][y] != '-')
+            return false;
+
+        griglia[x][y] = 'X';
         return true;
     }
 
-    bool giocatore_due(int x, int y){
-          if (x<2 || x>0){
-        return false;
-        }
-
-        if (y<2 || y>0){
-        return false;
-        }
-        if(griglia[x][y] == 1 || griglia [x][y] == 2){
+    bool giocatore_due(int x, int y) {
+        if (x > 2 || x < 0 || y > 2 || y < 0)
             return false;
-        }
-        griglia[x][y] == 2;
+
+        if (griglia[x][y] != '-')
+            return false;
+
+        griglia[x][y] = 'O';
         return true;
     }
 
+    char controlla_vincitore() {
+        char risultato;
+        for (int i = 0; i < 3; i++) {
+            risultato = controlla_collonna(i);
+            if (risultato != '-')
+                return risultato;
+
+            risultato = controlla_riga(i);
+            if (risultato != '-')
+                return risultato;
+        }
+
+        risultato = controlla_diagonali();
+        if (risultato != '-')
+            return risultato;
+
+        return '-';
+    }
+
+private:
+    char controlla_collonna(int col) {
+        char cella = griglia[0][col];
+        if (cella != '-') {
+            if (griglia[1][col] == cella && griglia[2][col] == cella)
+                return cella;
+        }
+        return '-';
+    }
+
+    char controlla_riga(int riga) {
+        char cella = griglia[riga][0];
+        if (cella != '-') {
+            if (griglia[riga][1] == cella && griglia[riga][2] == cella)
+                return cella;
+        }
+        return '-';
+    }
+
+    char controlla_diagonali() {
+        char cella = griglia[0][0];
+        if (cella != '-') {
+            if (griglia[1][1] == cella && griglia[2][2] == cella)
+                return cella;
+        }
+
+        cella = griglia[0][2];
+        if (cella != '-') {
+            if (griglia[1][1] == cella && griglia[2][0] == cella)
+                return cella;
+        }
+
+        return '-';
+    }
 };
 
-void stampa_griglia()
-bool giocatore_uno(int x, int y)
-bool giocatore_uno(int x, int y)
-
-int colonna vimcitore(){
-    int risultato;
-    for (int i=0; i< 3; i++){
-        risultato = controlla_colonna(i);
-        if (risultato != 0)
-            return risultato;
-    }
-}
-private:
-    int controlla_colonna(int col){
-        int acc uno = 0;
-        int acc due = 0;
-        for (int i = 0; i < 3; i++){
-            int cella = griglia[i][col];
-            if (cella == 1)
-                acc_uno++;
-            else if (cella == 2 )
-                acc_due++;
-        }
-        
-        if(acc_uno == 3)
-            return 1;
-        if(acc_due == 3)
-            return 2;
-        return 0;
-    }
-
-    int controlla_riga(int riga)
-    {
-    }
-        
-    int controlla_riga(int riga){
-        int ac_uno = 0;
-        int acc_due = 0;
-
-    }
-    
-
-int main(int arg, char const *argv[]){
+int main(int argc, char const *argv[]) {
     Tris myTris;
-
     myTris.reset_tabella();
 
-    cout<<"stato iniziale!" << endl;
+    cout << "Stato iniziale!" << endl;
     myTris.stampa_griglia();
 
     int x, y;
     bool mossa_valida;
-    int vincitore;
+    char vincitore = '-';
     int mosse_totali = 0;
 
-    while (mosse_totali<9)
-    {
-        do{
-            cout << "Mossa del giocatore 1."<< endl;
+    while (mosse_totali < 9) {
+        do {
+            cout << "Mossa del giocatore 1 (X)." << endl;
             cout << "x: ";
             cin >> x;
-
             cout << "y: ";
             cin >> y;
-            mossa_valida = myTris.giocatore_uno(x, y);
-        }while (!mossa_valida);
+            mossa_valida = myTris.giocatore_uno(y, x);
+        } while (!mossa_valida);
 
         myTris.stampa_griglia();
+        vincitore = myTris.controlla_vincitore();
+        if (vincitore != '-')
+            break;
 
-    vincitoreo = myTris.controlla_vincitore(;)
-    if(vincitore != 0)
-        break;
+        mosse_totali++;
 
-     do{
-        cout << "Mossa del giocatore 2."<< endl;
-        cout << "x: ";
-        cin >> x;
+        if (mosse_totali == 9)
+            break; // Controllo per parità
 
-        cout << "y: ";
-        cin >> y;
-        mossa_valida = myTris.giocatore_due(x, y);
-    }while (!mossa_valida);
+        do {
+            cout << "Mossa del giocatore 2 (O)." << endl;
+            cout << "x: ";
+            cin >> x;
+            cout << "y: ";
+            cin >> y;
+            mossa_valida = myTris.giocatore_due(y, x);
+        } while (!mossa_valida);
 
+        myTris.stampa_griglia();
+        vincitore = myTris.controlla_vincitore();
+        if (vincitore != '-')
+            break;
 
-    myTris.stampa_griglia();
+        mosse_totali++;
+    }
 
-    mosse_totali = mosse_totali + 2;
-
-}
-
-    if (vincitore == 1) 
-        cout << "vince giocatore 1" << endl;
-    else if(vincitore == 2)
-        cout <<"vince giocatore 2!" << endl;
+    if (vincitore == 'X')
+        cout << "Vince giocatore 1 (X)!" << endl;
+    else if (vincitore == 'O')
+        cout << "Vince giocatore 2 (O)!" << endl;
     else
-        cout << "pareggio" << endl;
-        
+        cout << "Pareggio!" << endl;
+
     return 0;
 }
