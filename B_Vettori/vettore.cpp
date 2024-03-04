@@ -21,6 +21,7 @@ public:
             int * nuovov = new int[dim + delta];
             for(int i = 0; i < dim; i++) nuovov[i] = v[i];
             dim += delta;
+            delete[] v;
             v = nuovov;
         }
         v[len] = n;
