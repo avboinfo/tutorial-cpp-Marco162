@@ -6,10 +6,10 @@ class mastermind
 private:
     int numero_mosse;
     std::string ultima_mossa;
-    int codice_segreto[DIM_GIOCATA_VALIDA];
 
     static const int DIM_GIOCATA_VALIDA = 4;
     int mossa_valida[DIM_GIOCATA_VALIDA];
+    int codice_segreto[DIM_GIOCATA_VALIDA];
 
     bool sanifica_input(){
         if(DIM_GIOCATA_VALIDA != ultima_mossa.size())
