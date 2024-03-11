@@ -2,21 +2,21 @@
 
 using namespace std;
 
-class Vettore{
+class pila{
 
     protected:
     int dim, len, delta;
     public: int * v;
 
 public:
-    Vettore(int dim, int delta){
+    pila(int dim, int delta){
         this->dim = dim;
         this->delta = delta;
         len = 0;
         v = new int[dim];
     }
     
-    void add( int n ){
+    void push( int n ){
         if (len == dim) {
             int * nuovov = new int[dim + delta];
             for(int i = 0; i < dim; i++) nuovov[i] = v[i];
@@ -28,6 +28,14 @@ public:
         len++;
     }
 
+    int pop(){
+        if (len==10){cout <<"\nERRORE pila vuota"; return 0;}
+
+        int result = v[len - 1];
+        len--;
+        return result;
+    }
+
     int getElement( int index ){
         return v[index];
     }
@@ -37,20 +45,17 @@ public:
     }
 
     void print(){
-        cout << "Contenuto del vettore: ";
+        cout << "Contenuto della pila: ";
         for(int i = 0; i < len; i++) cout << v[i] <<" ";
         cout << endl;
     }
 };
 
-int main(int argc, char * argv[]) {
+    int main(int argc, char * argv[]) {
+    
+    pila vett(10, 2);
+    for (int i = 0; i < 100; i++) vett.push(i);
+    for(int i=0; i<10; i++) cout<< vett.pop() <<"";
 
-    Vettore vett(10, 2);
-    for (int i = 0; i < 100; i++) vett.add(i);
-
-    cout <<vett.getElement(10) << endl;
-    vett.setElement(10, 333);
-
-
-    vett.print();
+    // vett.print();
 }
