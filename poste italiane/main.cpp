@@ -6,24 +6,31 @@
 using namespace std;
 
 int main() {
-    c.enter(85);
+    
+    Coda c = Coda(1000);
+
+    c.enter(355);
     c.exit();
-    c.enter(280);
+    c.enter(5);
     c.stampa();
 
+    cout << "Seleziona servizio [1-3]: " << endl;
+    cout << "1. Spedizione" << endl;
+    cout << "2. Ricezione" << endl;
+    cout << "3. Finanzarie" << "\n:";
     int servizio;
-    cout << "scegli uno tra i seguenti servizi:\n 1:SPEDIZIONE\n 2:RICEZIONE\n 3:FINANZIARIA\n:";
     cin >> servizio;
 
     if (servizio == 1){
-            poste p = poste("spedizione")
-        }
-        else if(servizio == 2){
-            poste p = poste("ricezione")
-        }
-        else if(servizio == 3){
-            poste p = poste("finanziaria")
-        }
+        Poste p = poste("spedizione");
+    } else if (servizio == 2){
+        Poste p = poste("ricezione");
+    } else if (servizio == 3){
+        Poste p = poste("finanzarie");
+    } else {
+        cout << "Servizio non disponibile" << endl;
+    }
 
+    
     return 0;
 }
