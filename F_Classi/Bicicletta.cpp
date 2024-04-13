@@ -41,3 +41,22 @@ int main()
     y.presentati();
     return 0;
 }
+
+
+
+
+} else {
+            cout << "Nessun cliente in attesa per servizio ";
+            switch (servizio) {
+                case Servizio::Spedizione:
+                    cout << "di spedizione." << endl;
+                    break;
+                case Servizio::Ricezione:
+                    cout << "di ricezione." << endl;
+                    break;
+                case Servizio::Finanziario:
+                    cout << "finanziario." << endl;
+                    break;
+            }
+        }
+    }

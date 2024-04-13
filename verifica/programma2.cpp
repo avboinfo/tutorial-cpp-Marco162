@@ -35,7 +35,7 @@ public:
 };
 
 int main() {
-    
+    Orario butt
 Orario ora(11, 40, 34);
 std::cout << "Ore: " << ora.stampaOrario() << std::endl;
 

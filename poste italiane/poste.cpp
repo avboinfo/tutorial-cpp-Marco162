@@ -1,73 +1,90 @@
 #include <iostream>
 #include <string>
+#include <cctype>
 #include "Coda.cpp"
+
 
 using namespace std;
 
-class Poste
-{
+class Poste {
 private:
-   int S, R, F;
-   string nome;
-   Coda cR, cS, cF;
-   int nR, nS, nF;
-
+    string servizio;
+    int nR = 0, nS = 0, nF = 0, numeroSpedizione = 0, numeroRicezione = 0, numeroFinanziaria = 0;
+    Coda cR = Coda(1000, "ricezione");
+    Coda cS = Coda(1000, "spedizione");
+    Coda cF = Coda(1000, "finanzarie");
+    
+    
 public:
-   
-    Poste( string nome) {
-        this->nome = nome;
-        cR = Coda("Ricezione", 1000);
-        cS = Coda("Spedizione", 1000);
-        cF = Coda("Finanziaria", 1000);
-        nR = nS = nF = 1;
+    Poste(){}
+    Poste(string servizio){
+        this->servizio = servizio;
+        if (servizio == "spedizione"){
+            addClient('s');
+        } else if (servizio == "ricezione"){
+            addClient('r');
+        } else if (servizio == "finanzarie"){
+            addClient('f');
+        } else {
+            cout << "Servizio non disponibile" << endl;
+        }
+
+    }
+
+    int addClient(char service){
+        switch (service)
+        {
+        case 's':
+            cR.enter(++nR);
+            spedizione();
+            return cR.exit();
+        case 'r':
+            cS.enter(++nS);
+            ricezione();
+            return cS.exit();
+        case 'f':
+            cF.enter(++nF);
+            finanzarie();
+            return cF.exit();
+        default:
+            cout << "Servizio non disponibile" << endl;
+            return -1;
+        }
+
     }
 
     void spedizione(){
-        cout <<"sei entrato nella coda SPEDIZIONE" << endl;
+        cout << "Servizio di spedizione" << endl;
     }
 
     void ricezione(){
-        cout <<"sei entrato nella coda RICEZIONE" << endl;
+        cout << "Servizio di ricezione" << endl;
     }
 
-    void finanziaria(){
-        cout <<"sei entrato nella coda FINANZIARIA" << endl;
+    void finanzarie(){
+        cout << "Servizio finanzarie" << endl;
     }
 
-        int nuovoCliente( char servizio ) {
-            switch ( servizio ) {
-                case 'r':
-                    cR.enter(nR ++);
-                    break;
-                case 's':
-                    cS.enter(nS ++);
-                    break;
-                case 'f':
-                    cF.enter(nF ++);
-                    break;
-                default:
-                    cout << "questo servizio te lo fai da solo!!!!!!!!!" << endl;
-            }
+    void stampa(){
+        cout << "Servizio di " << servizio << endl;
+        cout << "Clienti in coda: " << endl;
+        cout << "Ricezione: ";
+        cR.stampa();
+        cout << "Spedizione: ";
+        cS.stampa();
+        cout << "Finanzarie: ";
+        cF.stampa();
+    }
+
+    void utentiCoda(){
+        if(servizio == s{
+            numeroSpedizione++;
+            cout << "il numero del tuo biglietto è: " << numeroSpedizione << endl; 
         }
-   
-        void chiamaCliente(char servizio){
-            switch ( servizio ) {
-                case 'r':
-                    cR.exit(nR ++);
-                    break;
-                case 's':
-                    cS.exit(nS ++);
-                    break;
-                case 'f':
-                    cF.exit(nF ++);
-                    break;
-                default:
-                    cout << "questo servizio te lo fai da solo!!!!!!!!!" << endl;
-            }
+        if(servizio == to_string(1)){
+            numeroSpedizione++;
+            cout << "il numero del tuo biglietto è: " << numeroSpedizione << endl; 
         }
-   
-        void stampaTabellone(){
-            cout <<"Tabellone dell'ufficio postale: "<< nome << endl;
-            cs->
-        }
+    }
+
 };
